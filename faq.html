@@ -1,26 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Help Center (FAQ) - Sentimente</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Password Overlay Styles */
+        #password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .password-container {
+            background-color: var(--secondary-bg);
+            padding: 3rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .password-container h2 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        .password-container p {
+            color: var(--muted-text);
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .password-container input[type="password"] {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .password-container input[type="password"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+        }
+
+        .password-container button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .password-container button:hover {
+            background-color: #2563eb;
+        }
+
+        .error-message {
+            color: #ef4444;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        /* Prevent scrolling when overlay is active */
+        body.locked {
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body>
-    <nav style="padding: 1rem 2rem; border-bottom: 1px solid #e9ecef; max-width: 1200px; margin: 0 auto; width: 100%;">
-        <a href="index.html" style="text-decoration: none; color: #0066cc; font-weight: 600;">← Back to Home</a>
+
+<body class="locked">
+
+    <!-- Password Overlay Full Screen -->
+    <div id="password-overlay">
+        <div class="password-container">
+            <h2>Restricted Access</h2>
+            <p>Please enter the password to view the Help Center.</p>
+            <input type="password" id="password-input" placeholder="Enter password">
+            <button onclick="checkPassword()">Submit</button>
+            <div id="error-message" class="error-message">Incorrect password. Please try again.</div>
+        </div>
+    </div>
+
+    <!-- Main Content (Hidden initially by the overlay visually, but technically in DOM) -->
+    <nav
+        style="padding: 1.5rem 2rem; border-bottom: 1px solid #2a2a2c; max-width: 1200px; margin: 0 auto; width: 100%;">
+        <a href="index.html" style="text-decoration: none; color: var(--accent-color); font-weight: 600;">← Back to
+            Home</a>
     </nav>
 
     <main>
         <h1>Help Center (FAQ)</h1>
-        
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula.</p>
 
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+            commodo consequat.</p>
+        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
+            laborum.</p>
+        <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est
+            eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.
+            Duis ac tellus et risus vulputate vehicula.</p>
     </main>
 
-    
     <footer class="site-footer">
         <div class="footer-container">
             <div class="footer-column">
@@ -57,10 +166,65 @@
                 </ul>
             </div>
         </div>
+
+        <div class="footer-extra">
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="payment-methods">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+                <i class="fab fa-google-pay"></i>
+                <i class="fab fa-apple-pay"></i>
+            </div>
+            <div class="legal-ro">
+                <a href="anpc.html">ANPC</a>
+                <a href="sol.html">SAL / SOL</a>
+            </div>
+        </div>
+
         <div class="footer-bottom">
-            <p>&copy; 2026 Sentimente. All rights reserved.</p>
+            <p>&copy; 2026 Sentimente. Premium Experience.</p>
         </div>
     </footer>
 
+    <script>
+        function checkPassword() {
+            var inputElement = document.getElementById("password-input");
+            var errorElement = document.getElementById("error-message");
+            var overlayElement = document.getElementById("password-overlay");
+
+            // Set your static password here
+            var staticPassword = "admin";
+
+            if (inputElement.value === staticPassword) {
+                // Hide the overlay
+                overlayElement.style.opacity = "0";
+                setTimeout(function () {
+                    overlayElement.style.display = "none";
+                }, 300); // Wait for transition
+                // Allow scrolling again
+                document.body.classList.remove("locked");
+            } else {
+                // Show error message
+                errorElement.style.display = "block";
+                inputElement.value = "";
+                inputElement.focus();
+            }
+        }
+
+        // Allow pressing Enter to submit
+        document.getElementById("password-input").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+                checkPassword();
+            }
+        });
+
+        // Focus on input field automatically when page loads
+        document.getElementById("password-input").focus();
+    </script>
 </body>
+
 </html>
